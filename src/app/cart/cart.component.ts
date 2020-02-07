@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-cart',
@@ -8,18 +9,18 @@ import { CartService } from '../cart.service';
 })
 export class CartComponent implements OnInit {
 
-  constructor(private cart:CartService) { }
+  constructor(private cart: CartService, private data: DataService) { }
   cartItems;
   ngOnInit() {
-    this.cartItems=this.cart.cartItems;
+    this.cartItems = this.cart.cartItems;
   }
-  remove(indx)
-  {
-    this.cart.cartItems.splice(indx,1);
+  remove(indx) {
+    this.cart.cartItems.splice(indx, 1);
   }
-  checkOut()
-  {
-    alert("Checkout Successful");
+  checkOut() {
+    this.data.completeOrder(this.cartItems).subscribe(res => 
+      { alert("Checkout Successful"); }
+    )
   }
 
 }

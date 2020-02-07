@@ -15,4 +15,8 @@ export class DataService {
     console.log('data service called');
     return this.http.get(this.serverUrl+'/movies');
   }
+  completeOrder(items)
+  {
+    return this.http.post(this.serverUrl+'/orders',items);
+  }
 }

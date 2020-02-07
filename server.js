@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 
 var Movie = require('./backend/models/movie');
+var Order =require('./backend/models/order');
 
 
 
@@ -64,6 +65,23 @@ app.get('/api/movies', (req, res) => {
       res.json(docs);
     }
   });
+})
+app.post('/api/orders',(req,res)=>{
+ var ord={
+   "user":"Admin",
+   "items":req.body
+ }
+ console.log(JSON.stringify(ord));
+ var newOrder=new Order(ord);
+ newOrder.save((err,doc)=>{
+   if(err)
+   {
+    console.log("Error occurred");
+    res.json({"message":"error"});
+   }
+   else
+   res.json(doc);
+ })
 })
 
 
