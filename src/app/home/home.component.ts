@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import { DataService } from '../data.service';
 })
 export class HomeComponent implements OnInit {
   movies;
-  constructor(private data:DataService) { }
+  constructor(private data:DataService,private cart:CartService) { }
 
   ngOnInit() {
     this.data.getMovies().subscribe(d => {
@@ -22,8 +23,9 @@ export class HomeComponent implements OnInit {
   }
 
   addItem(idx){
+
     var movie = this.movies[idx];
-    alert("Added to cart : " + movie.title);
+    this.cart.cartItems.push(movie);
     
   }
 
