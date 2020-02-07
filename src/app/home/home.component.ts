@@ -16,8 +16,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addItem(evt){
-    alert(JSON.stringify(evt));
+  buy(idx){
+    var movie = this.movies[idx];
+    alert(movie.title);
+  }
+
+  addItem(idx){
+    var movie = this.movies[idx];
+    alert("Added to cart : " + movie.title);
+    
   }
 
 }
