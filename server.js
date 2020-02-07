@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 
 var Movie = require('./backend/models/movie');
-var Order =require('./backend/models/order');
+var Order = require('./backend/models/order');
 
 
 
@@ -51,7 +51,7 @@ app.use(cors());
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-// GET list of 30 movies
+// GET list of 30 movies - learn more about limit and skip in mongoose
 app.get('/api/movies', (req, res) => {
   Movie.find({}, 'title imdb poster year fullplot', {
     limit: 30
@@ -65,33 +65,26 @@ app.get('/api/movies', (req, res) => {
       res.json(docs);
     }
   });
+});
+
+// Store order at checkout in DB
+app.post('/api/orders', (req, res) => {
+  var ord = {
+    "user": "Admin",
+    "items": req.body
+  }
+  console.log(JSON.stringify(ord));
+  var newOrder = new Order(ord);
+  newOrder.save((err, doc) => {
+    if (err) {
+      console.log("Error occurred");
+      res.json({
+        "message": "error"
+      });
+    } else
+      res.json(doc);
+  })
 })
-app.post('/api/orders',(req,res)=>{
- var ord={
-   "user":"Admin",
-   "items":req.body
- }
- console.log(JSON.stringify(ord));
- var newOrder=new Order(ord);
- newOrder.save((err,doc)=>{
-   if(err)
-   {
-    console.log("Error occurred");
-    res.json({"message":"error"});
-   }
-   else
-   res.json(doc);
- })
-})
-
-
-
-
-
-
-
-
-
 
 
 
