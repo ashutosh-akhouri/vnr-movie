@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import { RatingModule } from 'ng-starrating';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxStarsModule } from 'ngx-stars';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +20,7 @@ import { CartComponent } from './cart/cart.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RatingModule
+    NgxStarsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
